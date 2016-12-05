@@ -58,7 +58,7 @@
        <h2>To Buy Now:</h2>
        <ul>
        <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
-         {{$index +1}} and    {{ toBuyList.itemName }} of {{ toBuyList.name }}
+          {{ item.quantity }} of {{ item.name }} <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
        </li>
        </ul>
 

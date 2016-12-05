@@ -9,12 +9,12 @@
   function ToBuyController(ShoppingListCheckOffService) {
     var toBuyList = this;
 
-    toBuyList.name="toBuyList";
+    //toBuyList.name="toBuyList";
     toBuyList.itemName = "";
-    toBuyList.itemQuantity ;
+    toBuyList.itemQuantity= "";
 
     toBuyList.addItemToBuyList = function () {
-    ShoppingListCheckOffService.addItemToBuyList(toBuyList.itemName, toBuyList.itemQuantity);
+    ShoppingListCheckOffService.addItemToBuyList(toBuyList.name, toBuyList.quantity);
   }
 
   toBuyList.items = ShoppingListCheckOffService.getToBuyItems();
@@ -33,16 +33,16 @@
   function ShoppingListCheckOffService() {
     var service = this;
 
-    var toBuyItems = [{"cookies":"10"},{"cola":"5"}];
+    var toBuyItems = [{name:"cookies",quantity:"10"},{name:"cola",quantity:"5"},{name:"ice cream",quantity:"3"}];
 
     service.getToBuyItems = function () {
     return toBuyItems;
    };
 
-    service.addItemToBuyList = function (itemName, quantity) {
+    service.addItemToBuyList = function (itemName, itemQuantity) {
     var item = {
       name: itemName,
-      quantity: quantity
+      quantity: itemQuantity
     };
     toBuyItems.push(item);
   };
