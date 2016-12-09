@@ -1,71 +1,63 @@
 <!doctype html>
 <html lang="en" ng-app="ShoppingListCheckOff">
-  <head>
+
+<head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
-      .emptyMessage {
-        font-weight: bold;
-        color: red;
-        font-size: 1.2em;
-      }
-      li {
-        margin-bottom: 7px;
-        font-size: 1.2em;
-      }
-      li > button {
-        margin-left: 6px;
-      }
-      button > span {
-        color: green;
-      }
+        .emptyMessage {
+            font-weight: bold;
+            color: red;
+            font-size: 1.2em;
+        }
+
+        li {
+            margin-bottom: 7px;
+            font-size: 1.2em;
+        }
+
+        li>button {
+            margin-left: 6px;
+        }
+
+        button>span {
+            color: green;
+        }
     </style>
-  </head>
+</head>
+
 <body>
-  <div class="container">
-  <h1>Shopping List Check Off</h1>
+    <div class="container">
+        <h1>Shopping List Check Off</h1>
 
-  <div class="row">
+        <div class="row">
 
+                <div ng-controller="ToBuyController as toBuyList">
+                    <h2>To Buy Now:</h2>
+                    <ul>
+                        <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
+                            {{ item.quantity }} of {{ item.name }} <button ng-click="toBuyList.moveItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+                        </li>
+                    </ul>
+                </div>
 
+                <div ng-controller="AlreadyBoughtController as boughtList">
+                  <h2>Already Bought:</h2>
+                  <ul>
+                      <li ng-model="boughtList.name" ng-model="boughtList.itemName" ng-model="boughtList.itemQuantity" ng-repeat="item in boughtList.items">
+                          {{ item.quantity }} of {{ item.name }}
+                      </li>
+                  </ul>
 
-  <div ng-controller="AlreadyBoughtController as bought">
+                </div>
 
-  </div>
-
-    <!-- To Buy List -->
-    <div class="col-md-6">
-     <h2>To Buy:</h2>
-     <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-     </ul>
-     <div class="emptyMessage">Everything is bought!</div>
-    </div>
-
-    <!-- Already Bought List -->
-    <div class="col-md-6">
-     <h2>Already Bought:</h2>
-     <ul>
-       <li>Bought 10 cookies</li>
-     </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
-
-     <div ng-controller="ToBuyController as toBuyList">
-       <h2>To Buy Now:</h2>
-       <ul>
-       <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
-          {{ item.quantity }} of {{ item.name }} <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
-       </li>
-       </ul>
-
-     </div>
-    </div>
-  </div>
-</div>
+            </div>
+        </div>
+    
 
 </body>
+
 </html>

@@ -1,55 +1,100 @@
-(function () {
-  angular.module('ShoppingListCheckOff', [])
-  .controller('ToBuyController', ToBuyController)
-  .controller('AlreadyBoughtController', AlreadyBoughtController)
-  .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+(function() {
+    angular.module('ShoppingListCheckOff', [])
+        .controller('ToBuyController', ToBuyController)
+        .controller('AlreadyBoughtController', AlreadyBoughtController)
+        .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+
+    ToBuyController.$inject = ['ShoppingListCheckOffService'];
+
+    function ToBuyController(ShoppingListCheckOffService) {
+        var toBuyList = this;
+
+        toBuyList.itemName = "";
+        toBuyList.itemQuantity = "";
+
+        toBuyList.addItemToBuyList = function() {
+            ShoppingListCheckOffService.addItemToBuyList(toBuyList.name, toBuyList.quantity);
+        }
+
+        toBuyList.items = ShoppingListCheckOffService.getToBuyItems();
+
+        toBuyList.moveItem = function($index) {
+            // console.log($index);
+            // console.log(toBuyList.items[$index]);
+            // console.log(toBuyList.items[$index].name);
+            ShoppingListCheckOffService.addItemToBoughtList(toBuyList.items[$index].name, toBuyList.items[$index].quantity);
+            ShoppingListCheckOffService.removeItemFromToBuyList($index);
+        };
+
+    }
 
 
-  ToBuyController.$inject = ['ShoppingListCheckOffService'];
-  function ToBuyController(ShoppingListCheckOffService) {
-    var toBuyList = this;
+    AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
 
-    //toBuyList.name="toBuyList";
-    toBuyList.itemName = "";
-    toBuyList.itemQuantity= "";
+    function AlreadyBoughtController(ShoppingListCheckOffService) {
+        var boughtList = this;
 
-    toBuyList.addItemToBuyList = function () {
-    ShoppingListCheckOffService.addItemToBuyList(toBuyList.name, toBuyList.quantity);
-  }
+        boughtList.itemName = "";
+        boughtList.itemQuantity = "";
 
-  toBuyList.items = ShoppingListCheckOffService.getToBuyItems();
-  console.log(toBuyList.items);
+        boughtList.addItemToBoughtList = function() {
+            ShoppingListCheckOffService.addItemToBoughtList(boughtList.name, boughtList.quantity);
+        }
 
-  }
+        boughtList.items = ShoppingListCheckOffService.getBoughtItems();
 
-
-  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
-  function AlreadyBoughtController(ShoppingListCheckOffService) {
-    var boughtList = this;
-
-  }
+    }
 
 
-  function ShoppingListCheckOffService() {
-    var service = this;
+    function ShoppingListCheckOffService() {
+        var service = this;
 
-    var toBuyItems = [{name:"cookies",quantity:"10"},{name:"cola",quantity:"5"},{name:"ice cream",quantity:"3"}];
+        var toBuyItems = [{
+            name: "cookies",
+            quantity: "10"
+        }, {
+            name: "cola",
+            quantity: "5"
+        }, {
+            name: "ice cream",
+            quantity: "3"
+        }];
 
-    service.getToBuyItems = function () {
-    return toBuyItems;
-   };
+        service.getToBuyItems = function() {
+            console.log(toBuyItems);
+            return toBuyItems;
+        };
 
-    service.addItemToBuyList = function (itemName, itemQuantity) {
-    var item = {
-      name: itemName,
-      quantity: itemQuantity
-    };
-    toBuyItems.push(item);
-  };
+        service.addItemToBuyList = function(itemName, itemQuantity) {
+            var item = {
+                name: itemName,
+                quantity: itemQuantity
+            };
+            toBuyItems.push(item);
+        };
 
-    var boughtItems = [];
+        service.removeItemFromToBuyList = function(itemIdex) {
+            toBuyItems.splice(itemIdex, 1);
+        };
 
-  }
+
+        var boughtItems = [];
+
+        service.getBoughtItems = function() {
+            // console.log(boughtItems);
+            return boughtItems;
+        };
+
+        service.addItemToBoughtList = function(itemName, itemQuantity) {
+            console.log(itemName + " " + itemQuantity);
+            var item = {
+                name: itemName,
+                quantity: itemQuantity
+            };
+            boughtItems.push(item);
+        };
+
+    }
 
 
 })();
