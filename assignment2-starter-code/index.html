@@ -35,28 +35,31 @@
 
         <div class="row">
 
-                <div ng-controller="ToBuyController as toBuyList">
-                    <h2>To Buy Now:</h2>
-                    <ul>
-                        <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
-                            {{ item.quantity }} of {{ item.name }} <button ng-click="toBuyList.moveItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
-                        </li>
-                    </ul>
-                </div>
+            <div ng-controller="ToBuyController as toBuyList">
+                <h2>To Buy Now:</h2>
+                <ul>
 
-                <div ng-controller="AlreadyBoughtController as boughtList">
-                  <h2>Already Bought:</h2>
-                  <ul>
-                      <li ng-model="boughtList.name" ng-model="boughtList.itemName" ng-model="boughtList.itemQuantity" ng-repeat="item in boughtList.items">
-                          {{ item.quantity }} of {{ item.name }}
-                      </li>
-                  </ul>
+                    <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
+                      Buy {{ item.quantity }} {{ item.name }} <button ng-click="toBuyList.moveItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+                    </li>
 
-                </div>
+                </ul>
+            </div>
+
+            <div ng-controller="AlreadyBoughtController as boughtList">
+                <h2>Already Bought:</h2>
+                <ul>
+                    <li ng-model="boughtList.name" ng-model="boughtList.itemName" ng-model="boughtList.itemQuantity" ng-repeat="item in boughtList.items">
+                        {{ item.quantity }} {{ item.name }}
+                        <li ng-show="!boughtList.items.length">Nothing bought yet!</li>
+                    </li>
+                </ul>
 
             </div>
+
         </div>
-    
+    </div>
+
 
 </body>
 

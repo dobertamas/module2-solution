@@ -50,6 +50,15 @@
         var service = this;
 
         var toBuyItems = [{
+            name: "beer",
+            quantity: "8"
+        },{
+            name: "wine",
+            quantity: "7"
+        },{
+            name: "banana",
+            quantity: "6"
+        },{
             name: "cookies",
             quantity: "10"
         }, {
