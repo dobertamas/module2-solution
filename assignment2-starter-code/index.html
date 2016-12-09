@@ -40,8 +40,8 @@
                 <ul>
 
                     <li ng-model="toBuyList.name" ng-model="toBuyList.itemName" ng-model="toBuyList.itemQuantity" ng-repeat="item in toBuyList.items">
-                      Buy {{ item.quantity }} {{ item.name }} <button ng-click="toBuyList.moveItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
-<li ng-show="!toBuyList.items.length">Everything is bought!</li>
+                        Buy {{ item.quantity }} {{ item.name }} <button ng-click="toBuyList.moveItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+                        <li ng-show="!toBuyList.items.length">Everything is bought!</li>
                     </li>
 
                 </ul>
@@ -51,7 +51,7 @@
                 <h2>Already Bought:</h2>
                 <ul>
                     <li ng-model="boughtList.name" ng-model="boughtList.itemName" ng-model="boughtList.itemQuantity" ng-repeat="item in boughtList.items">
-                      Bought {{ item.quantity }} {{ item.name }}(s)
+                        Bought {{ item.quantity }} {{ item.name }}(s)
                         <li ng-show="!boughtList.items.length">Nothing bought yet!</li>
                     </li>
                 </ul>
